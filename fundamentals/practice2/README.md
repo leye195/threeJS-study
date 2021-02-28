@@ -121,5 +121,3 @@ const geometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments)
 ```
 
 - TextGeometry: 3d text generated from a 3d font and a string
-
-## Scene Graph
