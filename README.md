@@ -1,6 +1,6 @@
 # ThreeJS Study
 
-## Study link
+**Study link**
 
 - https://threejsfundamentals.org/threejs/lessons/threejs-primitives.html
 - https://threejsfundamentals.org/threejs/lessons/kr/threejs-scenegraph.html
