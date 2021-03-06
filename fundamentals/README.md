@@ -150,6 +150,11 @@ camera.up.set(0,0,1);
 camera.lookAt.set(0,0,0);
 ```
 
+- Scene graph의 다른 예 자동차
+  <img src="https://threejsfundamentals.org/threejs/lessons/resources/images/scenegraph-car.svg"/>
+
+차체(car body)를 움직이면 바퀴(wheel)도 같이 움직임, 차체가 바퀴와 별도로 튀게 하려면 차체와 바퀴를 하나의 차체의 프레임 요소의 자식으로 설정해 줄 수 있다.
+
 **Object3D 활용**
 
 Object3D를 활용해 빈 공간으로 다른 오브젝트의 자식으로 추가해 줄 수 있음 (지역 공간)
@@ -167,6 +172,11 @@ objects.push(mesh);
 
 ```
 
+Object3D를 요소를 만들어 부모로 만드는 것은 Three.js 뿐만 아니라 다른 3D 엔진을 쓸 때도 중요함.
+
+뭔가를 만들다 보면 종종 복잡한 수학이 필요한 것 처럼 느껴지지만, Scene Graph를 사용하지 않으면 달의 궤도를 계산하거나 자동차 바퀴의 위치를 계산하는 건 굉장히 복잡해지기 때문에.
+Scene Graph를 적절히 활용하면 복잡한 동작을 더 쉽게 구현 가능함.
+
 **AxesHelper로 local space의 x,y,z 축 표시**
 
 ```
@@ -177,3 +187,40 @@ objects.forEach((node)=>{
   node.add(axes);
 });
 ```
+
+## Material
+
+기본적으로 Material(재질) 이란 물체가 Scene에 어떤 식으로 나타날지 결정하는 요소로 어떤 재질을 사용할지는 전적으로 상황에 따라 판단해야 됨
+
+속성을 정하는 방법은 2가지로 나뉜다.
+
+```
+//1.
+const material = new THREE.MeshPhongMaterial({
+  color: 0xffaacc,
+  flatShading: true
+});
+
+//2.
+const material = new THREE.MeshPhongMaterial();
+
+/*
+색상 설정은 HSL 외에도, RGB, HEX 등 여러방법이 있음
+material.color.set(0x00ff00);
+material.color.set(cssString); rgb(244,100,22)
+material.color.set(someColor); THREE.Color에 정의된 static 색상
+material.color.setHSL(h,s,l)  hsl 색상, 0~1
+material.color.setRGB(r,g,b)  rgb 색상, 0~1
+*/
+material.color.setHSL(0,1,.5);
+material.flatShading = true;
+```
+
+**Material 종류**
+
+- MeshBasicMaterial: 광원에 영향을 받지 않음
+- MeshLambertMaterial: 정점에서만 광원을 계산
+- MeshPhongMaterial: 픽셀 하나하나 전부 광원을 계산, 반사점(물체가 조명을 받을때 물체에 나타나는 밝은 점)도 지원
+  - shininess: MeshPhongMaterial 반사점의 밝기를 조절 가능
+- MeshToonMaterial: 투톤을 띄어 카툰 느낌을 줌.
+- MeshLambertMaterial or MeshPhongMaterial의 emissive에 색상을 지정하고, color를 black으로 지정하면 MeshBasic과 마찬가지로 입체감이 사라짐
