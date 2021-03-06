@@ -155,7 +155,6 @@ const main = () => {
     requestAnimationFrame(render);
   };
   requestAnimationFrame(render);
-
 }
 
 main();
