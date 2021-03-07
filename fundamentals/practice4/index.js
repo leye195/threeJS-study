@@ -1,5 +1,3 @@
-import {GUI} from 'https://threejsfundamentals.org/threejs/../3rdparty/dat.gui.module.js';
-
 const main = () => {
 
   const canvas = document.querySelector('#c');
